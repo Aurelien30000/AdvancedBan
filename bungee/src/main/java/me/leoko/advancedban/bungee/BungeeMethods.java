@@ -5,7 +5,6 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.imaginarycode.minecraft.redisbungee.RedisBungee;
-
 import me.leoko.advancedban.AbstractMethodInterface;
 import me.leoko.advancedban.ServerType;
 import me.leoko.advancedban.Universal;
@@ -53,7 +52,7 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
     private final Function<String, Permissionable> permissionableGenerator;
 
     public BungeeMethods() {
-    	super(BungeeMain.get().getDataFolder().toPath());
+        super(BungeeMain.get().getDataFolder().toPath());
         if (ProxyServer.getInstance().getPluginManager().getPlugin("LuckPerms") != null) {
             permissionableGenerator = LuckPermsOfflineUser::new;
 
@@ -70,11 +69,11 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
     }
 
     @Override
-	protected Configuration loadConfiguration(Path path) throws IOException {
-		try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
-			return ConfigurationProvider.getProvider(YamlConfiguration.class).load(reader);
-		}
-	}
+    protected Configuration loadConfiguration(Path path) throws IOException {
+        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            return ConfigurationProvider.getProvider(YamlConfiguration.class).load(reader);
+        }
+    }
 
     @Override
     public String getFromUrlJson(String url, String key) {
@@ -114,7 +113,8 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
         metrics.addCustomChart(new Metrics.SimplePie("MySQL", () -> DatabaseManager.get().isUseMySQL() ? "yes" : "no"));
     }
 
-    @Override @Deprecated
+    @Override
+    @Deprecated
     public boolean isBungee() {
         return true;
     }
@@ -193,9 +193,9 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
 
     @Override
     public void kickPlayer(String player, String reason) {
-        if(BungeeMain.getCloudSupport() != null){
+        if (BungeeMain.getCloudSupport() != null) {
             BungeeMain.getCloudSupport().kick(getPlayer(player).getUniqueId(), reason);
-        }else if (Universal.isRedis()) {
+        } else if (Universal.isRedis()) {
             RedisBungee.getApi().sendChannelMessage("advancedban:main", "kick " + player + " " + reason);
         } else {
             getPlayer(player).disconnect(TextComponent.fromLegacyText(reason));
@@ -392,7 +392,7 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
     @Override
     public void log(String msg) {
         ProxyServer.getInstance().getConsole().sendMessage(
-        		TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)));
+                TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)));
     }
 
     @Override

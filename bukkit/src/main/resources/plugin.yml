@@ -2,7 +2,7 @@ name: AdvancedBan
 version: ${project.version}
 main: ${project.groupId}.bukkit.BukkitMain
 author: Leoko
-softdepend: [Vault]
+softdepend: [ Vault ]
 api-version: 1.13
 
 commands:
@@ -14,10 +14,10 @@ commands:
     description: Ban a user temporarily
   ipban:
     description: Ban a user by IP
-    aliases: [banip, ban-ip]
+    aliases: [ banip, ban-ip ]
   tempipban:
     description: Ban a user temporarily by IP
-    aliases: [tipban]
+    aliases: [ tipban ]
   kick:
     description: Kick a user
   warn:

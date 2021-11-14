@@ -6,20 +6,16 @@ import me.leoko.advancedban.manager.PunishmentManager;
 import me.leoko.advancedban.manager.TimeManager;
 import me.leoko.advancedban.utils.Punishment;
 import me.leoko.advancedban.utils.PunishmentType;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by Leo on 07.08.2017.
@@ -30,12 +26,12 @@ public class PunishmentTest {
     public static File dataFolder;
 
     @BeforeAll
-    public static void setupUniversal(){
+    public static void setupUniversal() {
         Universal.get().setup(new TestMethods(dataFolder));
     }
 
     @Test
-    public void shouldCreatePunishmentForGivenUserWithGivenReason(){
+    public void shouldCreatePunishmentForGivenUserWithGivenReason() {
         assertFalse(PunishmentManager.get().isBanned("leoko"), "User should not be banned by default");
         CommandManager.get().onCommand("UnitTest", "ban", new String[]{"Leoko", "Doing", "some", "unit-testing"});
         assertTrue(PunishmentManager.get().isBanned("leoko"), "Punishment from above has failed");
@@ -43,12 +39,12 @@ public class PunishmentTest {
     }
 
     @Test
-    public void shouldKeepPunishmentAfterRestart(){
+    public void shouldKeepPunishmentAfterRestart() {
         System.out.println("Persistence test...");
         Punishment punishment = new Punishment("leoko", "leoko", "Persistence test", "JUnit5", PunishmentType.MUTE, TimeManager.getTime(), -1, null, -1);
         punishment.create();
         int id = punishment.getId();
-        System.out.println("Punishment ID >> "+id);
+        System.out.println("Punishment ID >> " + id);
         DatabaseManager.get().shutdown();
         DatabaseManager.get().setup(false);
         Punishment punishment1 = PunishmentManager.get().getPunishment(id);
@@ -57,7 +53,7 @@ public class PunishmentTest {
     }
 
     @Test
-    public void shouldWorkWithCachedAndNotCachedPunishments(){
+    public void shouldWorkWithCachedAndNotCachedPunishments() {
         Punishment punishment = new Punishment("cache", "cache", "Cache test", "JUnit5", PunishmentType.BAN, TimeManager.getTime(), -1, null, -1);
         punishment.create();
         assertFalse(PunishmentManager.get().getLoadedPunishments(false).contains(punishment), "Punishment should not be cached if user is not online");
@@ -67,7 +63,7 @@ public class PunishmentTest {
                 "Punishment should be cached after user is loaded");
         assertTrue(PunishmentManager.get().isBanned("cache"), "Punishment should be still active when in cache");
     }
-    
+
     @Test
     public void shouldBlockBasicCommandsIncludingColons() {
         Universal universal = Universal.get();
@@ -81,7 +77,7 @@ public class PunishmentTest {
         assertFalse(universal.isMuteCommand("replyall", muteCommands),
                 "Command not in the mute commands list, but similar to a command in the list, should not be blocked");
     }
-    
+
     @Test
     public void shouldBlockCommandsStartingWithMuteCommandWords() {
         Universal universal = Universal.get();
@@ -104,7 +100,7 @@ public class PunishmentTest {
     }
 
     @AfterAll
-    public static void shutdownUniversal(){
+    public static void shutdownUniversal() {
         Universal.get().shutdown();
     }
 }

@@ -94,7 +94,7 @@ public interface MethodInterface {
     /**
      * Register a command name to be handled by advancedban.
      *
-     * @param cmd the cmd
+     * @param cmd          the cmd
      * @param tabCompleter behaviour when tab completion is triggered
      */
     void setCommandExecutor(String cmd, TabCompleter tabCompleter);

@@ -1,7 +1,10 @@
 package me.leoko.advancedban;
 
 import com.google.gson.Gson;
-import me.leoko.advancedban.manager.*;
+import me.leoko.advancedban.manager.DatabaseManager;
+import me.leoko.advancedban.manager.PunishmentManager;
+import me.leoko.advancedban.manager.UUIDManager;
+import me.leoko.advancedban.manager.UpdateManager;
 import me.leoko.advancedban.utils.Command;
 import me.leoko.advancedban.utils.InterimData;
 import me.leoko.advancedban.utils.Punishment;
@@ -36,9 +39,6 @@ public class Universal {
 
 
     private final Gson gson = new Gson();
-
-
-
 
 
     /**
@@ -196,7 +196,7 @@ public class Universal {
 
     /**
      * Visible for testing. Do not use this. Please use {@link #isMuteCommand(String)}.
-     * 
+     *
      * @param cmd          the command
      * @param muteCommands the mute commands from the config
      * @return true if the command matched any of the mute commands.
@@ -217,9 +217,9 @@ public class Universal {
 
     /**
      * Visible for testing. Do not use this.
-     * 
+     *
      * @param commandWords the command run by a player, separated into its words
-     * @param muteCommand a mute command from the config
+     * @param muteCommand  a mute command from the config
      * @return true if they match, false otherwise
      */
     boolean muteCommandMatches(String[] commandWords, String muteCommand) {
@@ -342,6 +342,7 @@ public class Universal {
     }
 
     private static final String LOG_PREFIX = "&8[&cAdvancedBan&8] &7";
+
     /**
      * Log.
      *

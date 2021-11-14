@@ -66,13 +66,13 @@ public class Punishment {
     public void create(boolean silent) {
         if (id != -1) {
             Universal.get().log("!! Failed! AB tried to overwrite the punishment:");
-            Universal.get().log("!! Failed at: " + toString());
+            Universal.get().log("!! Failed at: " + this);
             return;
         }
 
         if (uuid == null) {
             Universal.get().log("!! Failed! AB has not saved the " + getType().getName() + " because there is no fetched UUID");
-            Universal.get().log("!! Failed at: " + toString());
+            Universal.get().log("!! Failed at: " + this);
             return;
         }
 
@@ -88,7 +88,7 @@ public class Punishment {
                         id = rs.getInt("id");
                     } else {
                         Universal.get().log("!! Not able to update ID of punishment! Please restart the server to resolve this issue!");
-                        Universal.get().log("!! Failed at: " + toString());
+                        Universal.get().log("!! Failed at: " + this);
                     }
                 }
             } catch (SQLException ex) {
@@ -171,7 +171,7 @@ public class Punishment {
 
         if (id == -1) {
             Universal.get().log("!! Failed deleting! The Punishment is not created yet!");
-            Universal.get().log("!! Failed at: " + toString());
+            Universal.get().log("!! Failed at: " + this);
             return;
         }
 

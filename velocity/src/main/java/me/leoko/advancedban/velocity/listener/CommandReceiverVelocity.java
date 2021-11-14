@@ -12,34 +12,34 @@ import java.util.List;
 
 public class CommandReceiverVelocity implements SimpleCommand {
 
-  private final ProxyServer server;
-  private final String cmd;
+    private final ProxyServer server;
+    private final String cmd;
 
-  public CommandReceiverVelocity(ProxyServer server, String cmd) {
-    this.cmd = cmd;
-    this.server = server;
-  }
-
-  @Override
-  public void execute(Invocation invocation) {
-    String[] args = invocation.arguments();
-    CommandSource commandSource = invocation.source();
-    if (invocation.arguments().length > 0) {
-      args[0] = (this.server.getPlayer(args[0]).isPresent() ? this.server.getPlayer(args[0]).get().getUsername() : args[0]);
+    public CommandReceiverVelocity(ProxyServer server, String cmd) {
+        this.cmd = cmd;
+        this.server = server;
     }
-    CommandManager.get().onCommand(commandSource, cmd, args);
-  }
 
-  @Override
-  public List<String> suggest(Invocation invocation) {
-      String[] args = invocation.arguments();
-      CommandSource source = invocation.source();
-      final Command command = Command.getByName(cmd);
-      if (command != null) {
-        if (command.getPermission() == null || Universal.get().getMethods().hasPerms(source, command.getPermission())) {
-          return command.getTabCompleter().onTabComplete(source, args);
+    @Override
+    public void execute(Invocation invocation) {
+        String[] args = invocation.arguments();
+        CommandSource commandSource = invocation.source();
+        if (invocation.arguments().length > 0) {
+            args[0] = (this.server.getPlayer(args[0]).isPresent() ? this.server.getPlayer(args[0]).get().getUsername() : args[0]);
         }
-      }
-      return Collections.emptyList();
-  }
+        CommandManager.get().onCommand(commandSource, cmd, args);
+    }
+
+    @Override
+    public List<String> suggest(Invocation invocation) {
+        String[] args = invocation.arguments();
+        CommandSource source = invocation.source();
+        final Command command = Command.getByName(cmd);
+        if (command != null) {
+            if (command.getPermission() == null || Universal.get().getMethods().hasPerms(source, command.getPermission())) {
+                return command.getTabCompleter().onTabComplete(source, args);
+            }
+        }
+        return Collections.emptyList();
+    }
 }

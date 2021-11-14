@@ -8,14 +8,14 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public class PunishmentEvent {
 
-  private final Punishment punishment;
+    private final Punishment punishment;
 
-  public PunishmentEvent(@NonNull Punishment punishment) {
-    this.punishment = punishment;
-  }
+    public PunishmentEvent(@NonNull Punishment punishment) {
+        this.punishment = punishment;
+    }
 
 
-  public Punishment getPunishment() {
-    return this.punishment;
-  }
+    public Punishment getPunishment() {
+        return this.punishment;
+    }
 }

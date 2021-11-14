@@ -12,7 +12,7 @@ import static me.leoko.advancedban.utils.CommandUtils.getPunishment;
 import static me.leoko.advancedban.utils.CommandUtils.processName;
 
 public class RevokeProcessor implements Consumer<Command.CommandInput> {
-    private PunishmentType type;
+    private final PunishmentType type;
 
     public RevokeProcessor(PunishmentType type) {
         this.type = type;
@@ -23,7 +23,7 @@ public class RevokeProcessor implements Consumer<Command.CommandInput> {
         String name = input.getPrimary();
 
         String target = name;
-        if(!target.matches("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$")) {
+        if (!target.matches("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$")) {
             target = processName(input);
             if (target == null)
                 return;

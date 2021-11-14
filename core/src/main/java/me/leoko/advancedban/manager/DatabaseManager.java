@@ -1,7 +1,6 @@
 package me.leoko.advancedban.manager;
 
 import com.zaxxer.hikari.HikariDataSource;
-import me.leoko.advancedban.Universal;
 import me.leoko.advancedban.utils.DynamicDataSource;
 import me.leoko.advancedban.utils.SQLQuery;
 import me.leoko.advancedban.utils.UncheckedSQLException;
@@ -29,7 +28,7 @@ public class DatabaseManager {
     private boolean useMySQL;
 
     private RowSetFactory factory;
-    
+
     private static DatabaseManager instance = null;
 
     /**
@@ -61,7 +60,7 @@ public class DatabaseManager {
     public void shutdown() {
         if (!useMySQL) {
             try (Connection connection = dataSource.getConnection();
-                    PreparedStatement statement = connection.prepareStatement("SHUTDOWN")) {
+                 PreparedStatement statement = connection.prepareStatement("SHUTDOWN")) {
                 statement.execute();
             } catch (SQLException ex) {
                 throw new UncheckedSQLException(ex);
@@ -70,12 +69,12 @@ public class DatabaseManager {
 
         dataSource.close();
     }
-    
+
     private CachedRowSet createCachedRowSet() throws SQLException {
-    	if (factory == null) {
-    		factory = RowSetProvider.newFactory();
-    	}
-    	return factory.createCachedRowSet();
+        if (factory == null) {
+            factory = RowSetProvider.newFactory();
+        }
+        return factory.createCachedRowSet();
     }
 
     /**
@@ -104,18 +103,18 @@ public class DatabaseManager {
     }
 
     private synchronized ResultSet executeStatement(String sql, boolean result, Object... parameters) {
-    	try (Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-    		for (int i = 0; i < parameters.length; i++) {
-    			statement.setObject(i + 1, parameters[i]);
-    		}
+            for (int i = 0; i < parameters.length; i++) {
+                statement.setObject(i + 1, parameters[i]);
+            }
 
-    		if (result) {
-    			CachedRowSet results = createCachedRowSet();
-    			results.populate(statement.executeQuery());
-    			return results;
-    		}
-   			statement.execute();
+            if (result) {
+                CachedRowSet results = createCachedRowSet();
+                results.populate(statement.executeQuery());
+                return results;
+            }
+            statement.execute();
         } catch (SQLException ex) {
             throw new UncheckedSQLException("Query " + sql + " with parameters " + Arrays.toString(parameters), ex);
         }

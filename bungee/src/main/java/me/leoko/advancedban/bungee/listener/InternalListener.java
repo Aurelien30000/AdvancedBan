@@ -18,11 +18,10 @@ import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author Beelzebu
  */
 public class InternalListener implements Listener {
@@ -31,12 +30,12 @@ public class InternalListener implements Listener {
 
     @EventHandler
     public void onPunish(PunishmentEvent e) {
-        sendToBukkit("Punish", Arrays.asList(e.getPunishment().toString()));
+        sendToBukkit("Punish", Collections.singletonList(e.getPunishment().toString()));
     }
 
     @EventHandler
     public void onUnPunish(RevokePunishmentEvent e) {
-        sendToBukkit("Unpunish", Arrays.asList(e.getPunishment().toString()));
+        sendToBukkit("Unpunish", Collections.singletonList(e.getPunishment().toString()));
     }
 
     @EventHandler

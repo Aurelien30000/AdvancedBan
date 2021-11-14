@@ -1,4 +1,3 @@
-
 package me.leoko.advancedban.bungee.cloud.support;
 
 import de.dytanic.cloudnet.api.player.PlayerExecutorBridge;

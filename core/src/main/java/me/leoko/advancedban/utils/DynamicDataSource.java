@@ -7,7 +7,7 @@ import me.leoko.advancedban.ServerType;
 import me.leoko.advancedban.Universal;
 
 public class DynamicDataSource {
-    private HikariConfig config = new HikariConfig();
+    private final HikariConfig config = new HikariConfig();
 
     public DynamicDataSource(boolean preferMySQL) {
         MethodInterface mi = Universal.get().getMethods();
@@ -19,11 +19,11 @@ public class DynamicDataSource {
             String properties = mi.getString(mi.getMySQLFile(), "MySQL.Properties", "verifyServerCertificate=false&useSSL=false&useUnicode=true&characterEncoding=UTF-8");
             int port = mi.getInteger(mi.getMySQLFile(), "MySQL.Port", 3306);
 
-            if(Universal.get().getServerType() == ServerType.VELOCITY) {
+            if (Universal.get().getServerType() == ServerType.VELOCITY) {
                 config.setDriverClassName("org.mariadb.jdbc.Driver");
             }
 
-            config.setJdbcUrl("jdbc:mysql://" + ip + ":" + port + "/" + dbName + "?"+properties);
+            config.setJdbcUrl("jdbc:mysql://" + ip + ":" + port + "/" + dbName + "?" + properties);
             config.setUsername(usrName);
             config.setPassword(password);
         } else {
@@ -34,7 +34,7 @@ public class DynamicDataSource {
         }
     }
 
-    public HikariDataSource generateDataSource(){
+    public HikariDataSource generateDataSource() {
         return new HikariDataSource(config);
     }
 }

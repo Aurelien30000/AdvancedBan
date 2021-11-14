@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Created by Leo on 07.08.2017.
  */
 public class TestMethods implements MethodInterface {
-	private final File dataFolder;
-	
-    public TestMethods(File dataFolder){
-    	this.dataFolder = Objects.requireNonNull(dataFolder);
+    private final File dataFolder;
+
+    public TestMethods(File dataFolder) {
+        this.dataFolder = Objects.requireNonNull(dataFolder);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class TestMethods implements MethodInterface {
 
     @Override
     public void sendMessage(Object player, String msg) {
-        System.out.println("Message: "+player+" -> "+msg);
+        System.out.println("Message: " + player + " -> " + msg);
     }
 
     @Override
@@ -249,11 +249,11 @@ public class TestMethods implements MethodInterface {
 
     @Override
     public boolean getBoolean(Object file, String path, boolean def) {
-        if(path.equals("DetailedEnableMessage")
+        if (path.equals("DetailedEnableMessage")
                 || path.equals("UUID-Fetcher.Enabled")
                 || path.equals("DetailedDisableMessage")) return false;
 
-        if(path.equals("Debug")) return true;
+        if (path.equals("Debug")) return true;
 
         return def;
     }

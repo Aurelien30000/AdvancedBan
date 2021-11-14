@@ -1,22 +1,11 @@
 package me.leoko.advancedban.manager;
 
 import me.leoko.advancedban.Universal;
-import me.leoko.advancedban.utils.InterimData;
-import me.leoko.advancedban.utils.Punishment;
-import me.leoko.advancedban.utils.PunishmentType;
-import me.leoko.advancedban.utils.SQLQuery;
-import me.leoko.advancedban.utils.UncheckedSQLException;
+import me.leoko.advancedban.utils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -29,9 +18,9 @@ public class PunishmentManager {
     private final Set<Punishment> punishments = Collections.synchronizedSet(new HashSet<>());
     private final Set<Punishment> history = Collections.synchronizedSet(new HashSet<>());
     private final Set<String> cached = Collections.synchronizedSet(new HashSet<>());
-    
+
     private Universal universal() {
-    	return Universal.get();
+        return Universal.get();
     }
 
     /**
@@ -230,30 +219,32 @@ public class PunishmentManager {
      */
     public List<Punishment> getWarns(String uuid) {
         return getPunishments(uuid, PunishmentType.WARNING, true);
-    } /**
+    }
+
+    /**
      * Get an active note by id.
-    *
-    * @param id the id
-    * @return the note
-    */
-   public Punishment getNote(int id) {
-       Punishment punishment = getPunishment(id);
+     *
+     * @param id the id
+     * @return the note
+     */
+    public Punishment getNote(int id) {
+        Punishment punishment = getPunishment(id);
 
-       if (punishment == null)
-           return null;
+        if (punishment == null)
+            return null;
 
-       return punishment.getType().getBasic() == PunishmentType.NOTE ? punishment : null;
-   }
+        return punishment.getType().getBasic() == PunishmentType.NOTE ? punishment : null;
+    }
 
-   /**
-    * Get a players active note.
-    *
-    * @param uuid the players uuid
-    * @return the note
-    */
-   public List<Punishment> getNotes(String uuid) {
-       return getPunishments(uuid, PunishmentType.NOTE, true);
-   }
+    /**
+     * Get a players active note.
+     *
+     * @param uuid the players uuid
+     * @return the note
+     */
+    public List<Punishment> getNotes(String uuid) {
+        return getPunishments(uuid, PunishmentType.NOTE, true);
+    }
 
     /**
      * Get a players active ban.
@@ -354,6 +345,7 @@ public class PunishmentManager {
     public int getCurrentWarns(String uuid) {
         return getWarns(uuid).size();
     }
+
     /**
      * Get how many notes a player has.
      *

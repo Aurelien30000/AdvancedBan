@@ -15,10 +15,10 @@ import java.util.function.Function;
 import static me.leoko.advancedban.utils.CommandUtils.processName;
 
 public class ListProcessor implements Consumer<Command.CommandInput> {
-    private Function<String, List<Punishment>> listSupplier;
-    private String config;
-    private boolean history;
-    private boolean hasTarget;
+    private final Function<String, List<Punishment>> listSupplier;
+    private final String config;
+    private final boolean history;
+    private final boolean hasTarget;
 
     public ListProcessor(Function<String, List<Punishment>> listSupplier, String config, boolean history, boolean hasTarget) {
         this.listSupplier = listSupplier;
@@ -52,11 +52,11 @@ public class ListProcessor implements Consumer<Command.CommandInput> {
         }
 
         punishments.removeIf(punishment -> {
-           boolean remove = punishment.isExpired() && !history;
-           if(remove)
-               punishment.delete();
+            boolean remove = punishment.isExpired() && !history;
+            if (remove)
+                punishment.delete();
 
-           return remove;
+            return remove;
         });
 
         int page = input.hasNext() ? Integer.parseInt(input.getPrimary()) : 1;
@@ -78,7 +78,7 @@ public class ListProcessor implements Consumer<Command.CommandInput> {
 
         for (int i = (page - 1) * 5; i < page * 5 && punishments.size() > i; i++) {
             Punishment punishment = punishments.get(i);
-            String nameOrIp = punishment.getType().isIpOrientated() ? punishment.getName() + " / " +punishment.getUuid() : punishment.getName();
+            String nameOrIp = punishment.getType().isIpOrientated() ? punishment.getName() + " / " + punishment.getUuid() : punishment.getName();
             List<String> entryLayout = MessageManager.getLayout(mi.getMessages(), config + ".Entry",
                     "PREFIX", prefix,
                     "NAME", nameOrIp,

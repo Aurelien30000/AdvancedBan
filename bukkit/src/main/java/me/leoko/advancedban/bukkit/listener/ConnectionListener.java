@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class ConnectionListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onConnect(AsyncPlayerPreLoginEvent event) {
-        if(event.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED){
+        if (event.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED) {
             UUIDManager.get().supplyInternUUID(event.getName(), event.getUniqueId());
             String result = Universal.get().callConnection(event.getName(), event.getAddress().getHostAddress());
             if (result != null) {
@@ -28,7 +28,7 @@ public class ConnectionListener implements Listener {
     }
 
     @EventHandler
-    public void onDisconnect(PlayerQuitEvent event){
+    public void onDisconnect(PlayerQuitEvent event) {
         PunishmentManager.get().discard(event.getPlayer().getName());
     }
 

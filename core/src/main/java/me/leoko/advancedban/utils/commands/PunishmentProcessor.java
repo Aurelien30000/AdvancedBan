@@ -17,7 +17,7 @@ import java.util.function.Function;
 import static me.leoko.advancedban.utils.CommandUtils.*;
 
 public class PunishmentProcessor implements Consumer<Command.CommandInput> {
-    private PunishmentType type;
+    private final PunishmentType type;
 
     public PunishmentProcessor(PunishmentType type) {
         this.type = type;
@@ -174,8 +174,8 @@ public class PunishmentProcessor implements Consumer<Command.CommandInput> {
     }
 
     private static class TimeCalculation {
-        private String template;
-        private Long time;
+        private final String template;
+        private final Long time;
 
         public TimeCalculation(String template, Long time) {
             this.template = template;

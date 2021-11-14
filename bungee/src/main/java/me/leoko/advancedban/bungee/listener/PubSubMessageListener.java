@@ -9,15 +9,14 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 /**
- *
  * @author Beelzebu
  */
 public class PubSubMessageListener implements Listener {
-    
+
     private static final MethodInterface mi = Universal.get().getMethods();
 
     @SuppressWarnings("deprecation")
-	@EventHandler
+    @EventHandler
     public void onMessageReceive(PubSubMessageEvent e) {
         if (e.getChannel().equals("advancedban:main")) {
             String[] msg = e.getMessage().split(" ");

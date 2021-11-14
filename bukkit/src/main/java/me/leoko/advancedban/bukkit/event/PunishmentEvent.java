@@ -8,9 +8,9 @@ import org.bukkit.event.HandlerList;
  * Event fired when a punishment is created
  */
 public class PunishmentEvent extends Event {
-	
+
     private static final HandlerList handlers = new HandlerList();
-    
+
     private final Punishment punishment;
 
     public PunishmentEvent(Punishment punishment) {

@@ -49,7 +49,7 @@ public class BukkitMethods extends AbstractMethodInterface<YamlConfiguration> {
     private BiFunction<OfflinePlayer, String, Boolean> permissionVault;
 
     public BukkitMethods() {
-    	super(BukkitMain.get().getDataFolder().toPath());
+        super(BukkitMain.get().getDataFolder().toPath());
         // Vault support
         if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
             RegisteredServiceProvider<net.milkbowl.vault.permission.Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
@@ -58,18 +58,18 @@ public class BukkitMethods extends AbstractMethodInterface<YamlConfiguration> {
     }
 
     @Override
-	protected YamlConfiguration loadConfiguration(Path path) throws IOException {
-		try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+    protected YamlConfiguration loadConfiguration(Path path) throws IOException {
+        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
 
-			YamlConfiguration config = new YamlConfiguration();
-			config.load(reader);
-			return config;
+            YamlConfiguration config = new YamlConfiguration();
+            config.load(reader);
+            return config;
 
-		} catch (InvalidConfigurationException ex) {
-			throw new IllegalStateException(
-					"Unable to load configuration file " + path + ". Please check the file for YAML syntax errors", ex);
-		}
-	}
+        } catch (InvalidConfigurationException ex) {
+            throw new IllegalStateException(
+                    "Unable to load configuration file " + path + ". Please check the file for YAML syntax errors", ex);
+        }
+    }
 
     @Override
     public String getFromUrlJson(String url, String key) {
@@ -107,7 +107,8 @@ public class BukkitMethods extends AbstractMethodInterface<YamlConfiguration> {
         metrics.addCustomChart(new Metrics.SimplePie("MySQL", () -> DatabaseManager.get().isUseMySQL() ? "yes" : "no"));
     }
 
-    @Override @Deprecated
+    @Override
+    @Deprecated
     public boolean isBungee() {
         return false;
     }
@@ -167,7 +168,7 @@ public class BukkitMethods extends AbstractMethodInterface<YamlConfiguration> {
     @Override
     public Permissionable getOfflinePermissionPlayer(String name) {
         OfflinePlayer player = Bukkit.getOfflinePlayer(name);
-        if(permissionVault == null || player == null || !player.hasPlayedBefore())
+        if (permissionVault == null || player == null || !player.hasPlayedBefore())
             return permission -> false;
 
         return permission -> permissionVault.apply(player, permission);

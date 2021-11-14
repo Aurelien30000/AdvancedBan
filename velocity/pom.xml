@@ -104,7 +104,8 @@
                         </goals>
                         <configuration>
                             <sourceDirectory>${basedir}/src/main/java-templates</sourceDirectory>
-                            <outputDirectory>${project.build.directory}/generated-sources/java-templates</outputDirectory>
+                            <outputDirectory>${project.build.directory}/generated-sources/java-templates
+                            </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

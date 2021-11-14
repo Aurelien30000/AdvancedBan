@@ -70,7 +70,7 @@ public enum PunishmentType {
     }
 
     public String getConfSection(String path) {
-        return name+"."+path;
+        return name + "." + path;
     }
 
     public PunishmentType getBasic() {
@@ -78,7 +78,7 @@ public enum PunishmentType {
     }
 
     public PunishmentType getPermanent() {
-        if(this == IP_BAN || this == TEMP_IP_BAN)
+        if (this == IP_BAN || this == TEMP_IP_BAN)
             return IP_BAN;
 
         return getBasic();

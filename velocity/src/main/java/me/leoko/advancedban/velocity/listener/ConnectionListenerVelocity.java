@@ -10,14 +10,14 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public class ConnectionListenerVelocity {
 
-  @Subscribe
-  public void onLogin(LoginEvent event) {
-    Player player = event.getPlayer();
-    UUIDManager.get().supplyInternUUID(player.getUsername(), player.getUniqueId());
-    String result = Universal.get().callConnection(player.getUsername(), player.getRemoteAddress().getAddress().getHostAddress());
-    if (result != null) {
-      event.setResult(ResultedEvent.ComponentResult.denied(LegacyComponentSerializer.legacyAmpersand().deserialize(result)));
+    @Subscribe
+    public void onLogin(LoginEvent event) {
+        Player player = event.getPlayer();
+        UUIDManager.get().supplyInternUUID(player.getUsername(), player.getUniqueId());
+        String result = Universal.get().callConnection(player.getUsername(), player.getRemoteAddress().getAddress().getHostAddress());
+        if (result != null) {
+            event.setResult(ResultedEvent.ComponentResult.denied(LegacyComponentSerializer.legacyAmpersand().deserialize(result)));
+        }
     }
-  }
 
 }

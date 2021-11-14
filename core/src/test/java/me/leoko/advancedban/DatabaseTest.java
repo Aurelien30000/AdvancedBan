@@ -1,11 +1,11 @@
 package me.leoko.advancedban;
 
-import java.io.File;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import java.io.File;
 
 /**
  * Created by Leo on 07.08.2017.
@@ -17,12 +17,12 @@ public class DatabaseTest {
     public static File dataFolder;
 
     @BeforeAll
-    public static void setupUniversal(){
+    public static void setupUniversal() {
         Universal.get().setup(new TestMethods(dataFolder));
     }
 
     @Test
-    public void shouldAutomaticallyDetectDatabaseType(){
+    public void shouldAutomaticallyDetectDatabaseType() {
         // DatabaseManagement behaviour changed in 2.1.9
 //        assertFalse("By default no connection with MySQL should be established as it's disabled", DatabaseManager.get().isUseMySQL() );
 //        assertFalse("MySQL should not be failed as it should not even try establishing any connection", DatabaseManager.get().isFailedMySQL());
@@ -34,7 +34,7 @@ public class DatabaseTest {
     }
 
     @AfterAll
-    public static void shutdownUniversal(){
+    public static void shutdownUniversal() {
         Universal.get().shutdown();
     }
 }
