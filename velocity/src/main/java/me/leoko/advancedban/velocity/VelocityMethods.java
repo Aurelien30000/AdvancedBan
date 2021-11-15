@@ -256,7 +256,7 @@ public class VelocityMethods extends AbstractMethodInterface<ConfigurationNode> 
     @Override
     public boolean callCMD(Object player, String cmd) {
         Punishment pnt;
-        if (Universal.get().isMuteCommand(cmd.substring(1))
+        if (Universal.get().isMuteCommand(cmd)
                 && (pnt = PunishmentManager.get().getMute(UUIDManager.get().getUUID(getName(player)))) != null) {
             for (String str : pnt.getLayout()) {
                 sendMessage(player, str);
