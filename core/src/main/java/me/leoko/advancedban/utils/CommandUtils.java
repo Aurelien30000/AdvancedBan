@@ -6,6 +6,8 @@ import me.leoko.advancedban.manager.MessageManager;
 import me.leoko.advancedban.manager.PunishmentManager;
 import me.leoko.advancedban.manager.UUIDManager;
 
+import java.util.UUID;
+
 public class CommandUtils {
     public static Punishment getPunishment(String target, PunishmentType type) {
         return type == PunishmentType.MUTE
@@ -17,13 +19,17 @@ public class CommandUtils {
     public static String processName(Command.CommandInput input) {
         String name = input.getPrimary();
         input.next();
-        String uuid = UUIDManager.get().getUUID(name.toLowerCase());
+        try {
+            return UUID.fromString(name).toString();
+        } catch (IllegalArgumentException ignored) {
+            String uuid = UUIDManager.get().getUUID(name.toLowerCase());
 
-        if (uuid == null)
-            MessageManager.sendMessage(input.getSender(), "General.FailedFetch",
-                    true, "NAME", name);
+            if (uuid == null)
+                MessageManager.sendMessage(input.getSender(), "General.FailedFetch",
+                        true, "NAME", name);
 
-        return uuid;
+            return uuid;
+        }
     }
 
     // Removes name/ip argument and returns ip (null if failed)
