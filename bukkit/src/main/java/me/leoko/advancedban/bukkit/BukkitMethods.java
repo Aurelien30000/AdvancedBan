@@ -13,6 +13,7 @@ import me.leoko.advancedban.utils.Permissionable;
 import me.leoko.advancedban.utils.Punishment;
 import me.leoko.advancedban.utils.tabcompletion.TabCompleter;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -103,8 +104,8 @@ public class BukkitMethods extends AbstractMethodInterface<YamlConfiguration> {
 
     @Override
     public void setupMetrics() {
-        Metrics metrics = new Metrics(getPlugin());
-        metrics.addCustomChart(new Metrics.SimplePie("MySQL", () -> DatabaseManager.get().isUseMySQL() ? "yes" : "no"));
+        Metrics metrics = new Metrics(getPlugin(), 1225);
+        metrics.addCustomChart(new SimplePie("MySQL", () -> DatabaseManager.get().isUseMySQL() ? "yes" : "no"));
     }
 
     @Override
@@ -344,7 +345,12 @@ public class BukkitMethods extends AbstractMethodInterface<YamlConfiguration> {
 
     @Override
     public void callPunishmentEvent(Punishment punishment) {
-        runSync(() -> Bukkit.getPluginManager().callEvent(new PunishmentEvent(punishment)));
+        callPunishmentEvent(punishment, false);
+    }
+
+    @Override
+    public void callPunishmentEvent(Punishment punishment, boolean silent) {
+        runSync(() -> Bukkit.getPluginManager().callEvent(new PunishmentEvent(punishment, silent)));
     }
 
     @Override

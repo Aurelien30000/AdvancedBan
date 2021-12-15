@@ -22,7 +22,7 @@
         <!-- RedisBungee -->
         <repository>
             <id>md_5-snapshots</id>
-            <url>http://repo.md-5.net/content/repositories/snapshots/</url>
+            <url>https://repo.md-5.net/content/repositories/snapshots/</url>
         </repository>
         <!-- CloudNet -->
         <repository>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>net.luckperms</groupId>
             <artifactId>api</artifactId>
-            <version>5.2</version>
+            <version>5.3</version>
             <scope>provided</scope>
         </dependency>
 
@@ -94,7 +94,7 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bungeecord</artifactId>
-            <version>1.5</version>
+            <version>2.2.1</version>
             <scope>compile</scope>
         </dependency>
 

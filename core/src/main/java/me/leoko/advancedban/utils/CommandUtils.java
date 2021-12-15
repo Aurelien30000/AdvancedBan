@@ -5,8 +5,7 @@ import me.leoko.advancedban.Universal;
 import me.leoko.advancedban.manager.MessageManager;
 import me.leoko.advancedban.manager.PunishmentManager;
 import me.leoko.advancedban.manager.UUIDManager;
-
-import java.util.UUID;
+import org.geysermc.floodgate.api.FloodgateApi;
 
 public class CommandUtils {
     public static Punishment getPunishment(String target, PunishmentType type) {
@@ -19,17 +18,20 @@ public class CommandUtils {
     public static String processName(Command.CommandInput input) {
         String name = input.getPrimary();
         input.next();
-        try {
-            return UUID.fromString(name).toString();
-        } catch (IllegalArgumentException ignored) {
-            String uuid = UUIDManager.get().getUUID(name.toLowerCase());
+        String uuid;
 
-            if (uuid == null)
-                MessageManager.sendMessage(input.getSender(), "General.FailedFetch",
-                        true, "NAME", name);
-
-            return uuid;
+        FloodgateApi floodgateApi;
+        if (name.startsWith(".") && (floodgateApi = FloodgateApi.getInstance()) != null) {
+            uuid = floodgateApi.getUuidFor(name.substring(1)).join().toString();
+        } else {
+            uuid = UUIDManager.get().getUUID(name.toLowerCase());
         }
+
+        if (uuid == null)
+            MessageManager.sendMessage(input.getSender(), "General.FailedFetch",
+                    true, "NAME", name);
+
+        return uuid;
     }
 
     // Removes name/ip argument and returns ip (null if failed)

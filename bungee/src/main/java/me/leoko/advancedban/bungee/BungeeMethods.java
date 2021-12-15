@@ -29,6 +29,7 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import org.bstats.bungeecord.Metrics;
+import org.bstats.charts.SimplePie;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -109,8 +110,8 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
 
     @Override
     public void setupMetrics() {
-        Metrics metrics = new Metrics(getPlugin());
-        metrics.addCustomChart(new Metrics.SimplePie("MySQL", () -> DatabaseManager.get().isUseMySQL() ? "yes" : "no"));
+        Metrics metrics = new Metrics(getPlugin(), 1225);
+        metrics.addCustomChart(new SimplePie("MySQL", () -> DatabaseManager.get().isUseMySQL() ? "yes" : "no"));
     }
 
     @Override
@@ -364,7 +365,12 @@ public class BungeeMethods extends AbstractMethodInterface<Configuration> {
 
     @Override
     public void callPunishmentEvent(Punishment punishment) {
-        getPlugin().getProxy().getPluginManager().callEvent(new PunishmentEvent(punishment));
+        callPunishmentEvent(punishment, false);
+    }
+
+    @Override
+    public void callPunishmentEvent(Punishment punishment, boolean silent) {
+        getPlugin().getProxy().getPluginManager().callEvent(new PunishmentEvent(punishment, silent));
     }
 
     @Override
