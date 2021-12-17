@@ -22,7 +22,7 @@ public class CommandUtils {
 
         FloodgateApi floodgateApi;
         if (name.startsWith(".") && (floodgateApi = FloodgateApi.getInstance()) != null) {
-            uuid = floodgateApi.getUuidFor(name.substring(1)).join().toString();
+            uuid = floodgateApi.getUuidFor(name.substring(1)).join().toString().replace("-", "");
         } else {
             uuid = UUIDManager.get().getUUID(name.toLowerCase());
         }
